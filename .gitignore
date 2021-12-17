@@ -1,0 +1,4 @@
+__pycache__
+.direnv
+.envrc
+.mypy_cache
