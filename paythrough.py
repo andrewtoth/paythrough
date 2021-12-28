@@ -8,6 +8,7 @@ plugin = Plugin()
 
 @plugin.init()
 def init(options: dict, configuration: dict, plugin: Plugin, **kwargs):
+    plugin.log('Plugin paythrough initialized')
     return {}
 
 @plugin.method('paythrough')
