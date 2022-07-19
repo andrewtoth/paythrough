@@ -5,8 +5,7 @@ even if a better/cheaper route exists through a different channel. A new RPC,
 `paythrough`, is defined which takes the same arguments as `pay`, except the
 second argument is `scid` which is the short-channel-id of the channel you wish
 to pay through. This leverages the `exclude` argument on `pay`, so that argument
-is removed. Since this new argument is only available on master, this plugin is
-still experimental and is incompatible with any stable releases.
+is removed.
 
 This can be useful for keeping channels balanced or otherwise managing liquidity
 when you will be paying for something through lightning anyways.
