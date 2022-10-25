@@ -23,6 +23,8 @@ def paythrough(plugin, bolt11, scid, msatoshi=None, label=None, riskfactor=None,
     peers = plugin.rpc.listpeers()['peers']
     channels = list(map(lambda peer: peer['channels'], peers))
     channels = [item for sublist in channels for item in sublist]
+    channels = list(filter(lambda channel:
+                    channel['state'] == 'CHANNELD_NORMAL', channels))
     channels_length = len(channels)
     channels = list(filter(lambda channel: channel['short_channel_id'] != scid,
                     channels))
