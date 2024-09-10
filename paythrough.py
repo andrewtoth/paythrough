@@ -20,12 +20,15 @@ def paythrough(plugin, bolt11, scid, msatoshi=None, label=None, riskfactor=None,
     All parameters after scid are identical to pay except exclude. These will
     all be forwarded to pay via this plugin.
     """
-    peers = plugin.rpc.listpeers()['peers']
-    channels = list(map(lambda peer: peer['channels'], peers))
-    channels = [item for sublist in channels for item in sublist]
-    channels = list(filter(lambda channel:
-                    channel['state'] == 'CHANNELD_NORMAL', channels))
+    # Fetch the list of channels from the RPC response
+    channels = plugin.rpc.listpeerchannels()['channels']
+
+    # Filter out only the channels that are in 'CHANNELD_NORMAL' state
+    channels = list(filter(lambda channel: channel['state'] == 'CHANNELD_NORMAL', channels))
+
+    # Get the length of the filtered channels
     channels_length = len(channels)
+    
     channels = list(filter(lambda channel: channel['short_channel_id'] != scid,
                     channels))
     

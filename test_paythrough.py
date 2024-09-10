@@ -27,7 +27,7 @@ def test_paythrough_starts(node_factory):
     l1.rpc.plugin_stop(plugin_path)
 
 def get_peer(node, id):
-    return node.rpc.listpeers(id)['peers'][0]['channels'][0]
+    return node.rpc.listpeerchannels(id)['channels'][0]
 
 def has_spendable(node, id):
     p = get_peer(node, id)
@@ -58,9 +58,9 @@ def test_paythrough_paythrough(capsys, node_factory):
     node_factory.join_nodes([l1, l3])
     node_factory.join_nodes([l1, l4])
 
-    scid12 = l1.rpc.listpeers(ids[1])['peers'][0]['channels'][0]['short_channel_id']
-    scid13 = l1.rpc.listpeers(ids[2])['peers'][0]['channels'][0]['short_channel_id']
-    scid14 = l1.rpc.listpeers(ids[3])['peers'][0]['channels'][0]['short_channel_id']
+    scid12 = l1.rpc.listpeerchannels(ids[1])['channels'][0]['short_channel_id']
+    scid13 = l1.rpc.listpeerchannels(ids[2])['channels'][0]['short_channel_id']
+    scid14 = l1.rpc.listpeerchannels(ids[3])['channels'][0]['short_channel_id']
 
     msats = round(5e7)
 
